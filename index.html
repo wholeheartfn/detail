@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>우리상조 | 따뜻하고 믿음직한 상조 서비스</title>
+    <meta name="description" content="따뜻하고 세련된, 가족 같은 배려로 함께하는 우리상조. 준비부터 마무리까지 전 과정을 정직하게 함께합니다." />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="우리상조 | 따뜻하고 믿음직한 상조 서비스" />
+    <meta property="og:description" content="따뜻하고 세련된, 가족 같은 배려로 함께하는 우리상조." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <!-- og:image는 외부 정식 배포 시 URL로 설정 권장 -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg: #fff4ea; /* 따뜻한 배경(한 톤 다운) */
+        --surface: #ffffff; /* 기본 표면 */
+        --surface-elevated: #ffffff; /* 떠 있는 카드/박스 */
+        --text: #1a1a1a;
+        --muted-text: #4c4c4c; /* 가독성 향상: 대비 소폭 상향 */
+        --brand: #c16747; /* 테라코타 톤 */
+        --brand-weak: #f2d6cb;
+        --accent: #2f6a5f; /* 그린 톤으로 안정감 */
+        --border: #eee6e1; /* 기본 보더 */
+        --border-strong: #d9c9c2; /* 대비 강한 보더 - 더 진하게 */
+        --shadow: 0 6px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+        --radius: 14px;
+        --radius-sm: 10px;
+        --radius-lg: 22px;
+        --container: 1080px;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+        font-size: 17px;
+        line-height: 1.7;
+        overflow-x: hidden;
+        padding-bottom: 24px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @supports(padding: max(0px)) { body { padding-bottom: max(24px, env(safe-area-inset-bottom)); } }
+
+      /* Layout */
+      .container {
+        width: 100%;
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: saturate(180%) blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--brand);
+      }
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--brand) 0%, #e38a6a 100%);
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+      }
+      .cta-nav {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .btn {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        padding: 14px 20px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+        will-change: transform;
+        min-height: 48px; /* 터치 타깃 보장 */
+      }
+      .btn:focus-visible { outline: 3px solid #e7a691; outline-offset: 2px; }
+      @media (prefers-reduced-motion: reduce) {
+        * { transition: none !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+      }
+      .btn:active { transform: translateY(1px); }
+      .btn.primary {
+        background: linear-gradient(180deg, #8fdec8 0%, #4b9b8d 70%);
+        color: white;
+        box-shadow: 0 10px 22px rgba(47,106,95,.20), inset 0 1px 0 rgba(255,255,255,.22);
+      }
+      .btn.primary:hover { background: linear-gradient(180deg, #78d0b0 0%, #438e80 70%); }
+      .btn.ghost {
+        background: transparent;
+        color: #3a8f80;
+        border: 1px solid #8cc9bb;
+        padding: 13px 19px; /* 좌우 1px 줄여 테두리(2px) 보정 */
+      }
+      .btn.ghost:hover { background: #f6fbf9; border-color: #5fa497; box-shadow: 0 8px 18px rgba(47,106,95,.08); }
+
+      /* Hero */
+      .hero { padding: 64px 0 20px; position: relative; }
+      .hero::before { content:""; position:absolute; inset:-10% -10% auto -10%; height: 360px; background: radial-gradient(1200px 300px at 30% 0%, #ffeae0 0%, rgba(255,234,224,0) 60%); pointer-events:none; z-index:-1; }
+      .hero-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent);
+        background: #eff6f4;
+        border: 1px solid #dfece7;
+        padding: 9px 14px;
+        border-radius: 999px;
+        margin-left: -10px; /* 미세 조정: 라인에 더 가깝게 */
+      }
+      h1 {
+        margin: 12px 0 10px;
+        font-size: clamp(28px, 7.2vw, 52px);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+      }
+      @media (max-width: 719px) {
+        h1 { font-size: 28px; letter-spacing: -0.02em; }
+        .sub { font-size: 15px; line-height: 1.75; }
+      }
+      .sub { color: var(--muted-text); line-height: 1.75; font-size: 16px; }
+      .hero-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .trust {
+        margin-top: 18px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        color: var(--muted-text);
+        font-size: 12px;
+      }
+      .hero-media {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-lg);
+        background: linear-gradient(180deg, #fff 0%, #fff6f0 100%);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      .hero-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Section */
+      section { padding: 28px 0; }
+      .section-head { margin-bottom: 14px; }
+      section.container { margin-bottom: 24px; }
+      .kicker { color: var(--accent); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .9; position: relative; padding-left: 12px; }
+      .kicker::before { content: ""; position: absolute; left: 0; top: 50%; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; transform: translateY(-50%); opacity: .9; }
+      .title { margin: 8px 0 6px; font-size: clamp(20px, 6vw, 28px); letter-spacing: -0.02em; word-break: keep-all; white-space: nowrap; position: relative; }
+      .title::after { content: ""; display: block; height: 3px; width: 48px; margin-top: 8px; border-radius: 3px; background: linear-gradient(90deg, rgba(47,106,95,.35), rgba(47,106,95,0)); }
+      .desc { color: var(--muted-text); font-size: 16px; line-height: 1.7; text-wrap: pretty; max-width: 68ch; }
+      .measure { max-width: 68ch; }
+
+      /* Alternating section background rhythm */
+      .section-alt { background: linear-gradient(180deg, #fff, #fff7f2); }
+      .section-alt .container { padding-top: 28px; padding-bottom: 28px; }
+      .section-alt { box-shadow: inset 0 1px 0 rgba(0,0,0,.04); }
+
+      /* Emphasis blocks */
+      .notice { background: var(--surface-elevated); border: 1px solid var(--border-strong); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px; }
+      .pill { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid #eedfda; background:#fff4ef; color: var(--brand); font-weight:700; font-size:12px; }
+      .checklist { display:grid; gap:10px; margin-top:10px; }
+      .check { display:flex; gap:10px; align-items:flex-start; }
+      .check i { width:18px; height:18px; border-radius:99px; background:var(--accent); margin-top:3px; box-shadow:0 0 0 2px #e9f2ef inset; }
+      .compare { display:grid; grid-template-columns:1fr; gap:12px; }
+      .compare .col { background:var(--surface-elevated); border:1px solid var(--border-strong); border-radius:var(--radius); box-shadow: var(--shadow); padding:14px; }
+      .compare .col h4 { margin:0 0 8px; }
+
+      /* Cards */
+      .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .mini-grid { display:grid; grid-template-columns:1fr; gap:12px; margin-top:10px; }
+      .pills { display:flex; flex-wrap: wrap; gap:10px; margin-top:10px; }
+      .chip { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); background:#fff; border-radius:999px; padding:8px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+      .chip b { color: var(--brand); }
+      .feature-groups { display: grid; grid-template-columns: 1fr; gap: 20px; }
+      .group { display: grid; gap: 12px; }
+      .group-title { display: flex; align-items: center; gap: 10px; }
+      .group-title .tag { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: #eff6f4; border: 1px solid #dfece7; padding: 6px 10px; border-radius: 999px; }
+      .group-title .line { height: 1px; background: var(--border); flex: 1; border-radius: 1px; }
+      .group-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .card { background: var(--surface-elevated); border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.05); padding: 8px; width: 100%; max-width: 100%; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+      .card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.08); border-color: #e0d2cc; }
+      .card.accent { border-left: 5px solid var(--brand); margin-bottom: 14px; background: #ffffff; border-color: #d9c9c2; box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+      ul.compact li::marker { color: var(--brand); }
+      ul.compact { margin: 6px 0 0; padding-left: 18px; }
+      ul.compact li { margin: 6px 0; }
+      ul.compact b { color: var(--brand); }
+      /* Feature 하이라이트: 세 번째 카드에만 적용 */
+      #features .card:nth-child(3) { border-left: 4px solid var(--accent); background: #ffffff; }
+      .card h3 { margin: 0 0 6px; font-size: 19px; font-weight: 800; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
+      .card h3::before { content: none; display: none; }
+      /* mini-grid(나만의 방식/지정인 공유/원활한 진행) 제목 앞 도트 복원 */
+      .mini-grid .card h3::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 999px; background: linear-gradient(180deg, #8fdec8, #4b9b8d); box-shadow: 0 0 0 2px #e7f4f0; }
+      /* Inline SVG icon style */
+      .icon { width: 18px; height: 18px; display: inline-block; vertical-align: -3px; color: #4b9b8d; }
+
+      /* Soft banner / quote */
+      .poem { font-family: 'Noto Serif KR', serif; letter-spacing: -0.01em; }
+      .soft-banner { border: 0; border-radius: 0; padding: 8px 0; background: transparent; box-shadow: none; text-align: center; }
+      .soft-banner .desc { margin: 0; font-size: 18px; line-height: 1.9; white-space: nowrap; }
+      .quote-card { border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 10px 0 2px; text-align: center; }
+      .quote { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.9; white-space: nowrap; }
+      .quote-sub { font-size: .96em; }
+      .quote small { display:block; color: var(--muted-text); font-weight: 500; margin-top: 10px; }
+
+      /* CTA emblem */
+      .cta .emblem { display:flex; justify-content:center; gap:8px; margin-bottom:8px; opacity:.9 }
+      .cta .emblem svg { width:22px; height:22px; color:#4b9b8d; }
+      .card p { margin: 0; color: var(--muted-text); font-size: 16px; line-height: 1.7; }
+      
+
+      /* Process */
+      .steps { display: grid; grid-template-columns: 1fr; gap: 8px; }
+      .step { display: flex; gap: 10px; align-items: flex-start; padding: 6px 8px; background: var(--surface-elevated); border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.05); width: 100%; max-width: 100%; }
+      .num { flex: none; width: 28px; height: 28px; border-radius: 999px; background: linear-gradient(180deg, #8edbb8 0%, #2f6a5f 90%); color: #fff; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+      .step .desc { margin: 2px 0 0; }
+
+      /* FAQ */
+      details { background: #fff; border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.05); overflow: hidden; width: 100%; max-width: 100%; transition: box-shadow .2s ease, border-color .2s ease; }
+      details + details { margin-top: 10px; }
+      summary { cursor: pointer; font-weight: 800; padding: 14px 14px; list-style: none; display: flex; align-items: center; justify-content: space-between; font-size: 15px; line-height: 1.6; }
+      summary::-webkit-details-marker { display: none; }
+      summary::after { content: '⌄'; color: var(--muted-text); transition: transform .2s ease; margin-left: 12px; font-size: 18px; }
+      details[open] summary::after { transform: rotate(180deg); }
+      details p { margin: 0; padding: 0 12px 10px; color: var(--muted-text); transition: opacity .18s ease, transform .18s ease; opacity: .95; }
+      details[open] p { opacity: 1; transform: translateY(0); }
+      details[open] { border-color: #eadbd5; box-shadow: 0 10px 24px rgba(0,0,0,.06); }
+
+      /* CTA */
+      .cta { background: var(--surface-elevated); border: 1px solid var(--border-strong); border-radius: 16px; padding: 20px; box-shadow: 0 6px 16px rgba(0,0,0,.06); text-align: center; margin-bottom: 16px; position:relative; }
+      .cta::before { content:""; position:absolute; inset:-1px; border-radius: 18px; padding:1px; background: linear-gradient(180deg, rgba(193,103,71,.35), rgba(255,255,255,0)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+      .cta .btn { margin-top: 18px; display: inline-block; }
+      .cta .btn { display: block; width: min(100%, 260px); margin-left: auto; margin-right: auto; text-align: center; }
+      .cta h2 { margin: 0 0 8px; font-size: clamp(18px, 5.2vw, 22px); white-space: nowrap; }
+      .cta p { margin: 0 0 24px; color: var(--muted-text); }
+
+      /* Divider */
+      .divider { height: 18px; }
+      .divider::before { content:""; display:block; height: 1px; margin: 0 auto; width: 86%; background: linear-gradient(90deg, rgba(0,0,0,0), rgba(47,106,95,.18), rgba(0,0,0,0)); border-radius: 1px; }
+
+      footer { padding: 30px 0 50px; color: var(--muted-text); font-size: 13px; }
+      .foot-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+      .foot-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+
+      /* Larger screens */
+      @media (min-width: 720px) {
+        .hero { padding: 96px 0 28px; }
+        h1 { font-size: 52px; }
+        .sub { font-size: 17px; }
+        .eyebrow { font-size: 18px; }
+        .hero-wrap { grid-template-columns: 1.1fr 1fr; gap: 28px; }
+        .grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .group-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .steps { grid-template-columns: repeat(2, 1fr); }
+        .foot-grid { grid-template-columns: repeat(3, 1fr); }
+        .compare { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 719px) {
+        section { padding: 36px 0; }
+        .container { padding: 0 20px; } /* 모바일 좌우 여백 소폭 추가 */
+        .section-head { margin-bottom: 18px; }
+        .grid, .group-grid, .steps { gap: 16px; }
+        details p { padding: 0 14px 14px; }
+        /* 섹션 간 간격 미세 조정 */
+        #join { padding-bottom: 20px; }
+        #faq { padding-top: 24px; }
+      }
+      @media (min-width: 1024px) {
+        .grid { grid-template-columns: repeat(3, 1fr); }
+        .group-grid { grid-template-columns: repeat(3, 1fr); }
+        .steps { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      /* Helpers */
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+      a { color: inherit; text-decoration: none; }
+      .sep { width: 1px; height: 10px; background: var(--border); }
+    </style>
+  </head>
+  <body>
+    
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container hero-wrap">
+          <div>
+            <span class="eyebrow">나와 소중한 우리 가족을 위한 선택</span>
+            <h1>
+              아름다운 마무리를 함께하는<br/>
+              <span style="color:var(--brand)">참정성가득 우리상조</span>
+            </h1>
+            <p class="sub">
+              "후불제니까 나중에 생각해도 되겠지…" 혹시 이런 마음으로 미루고 계신 건 아닌가요?
+            </p>
+            
+          </div>
+          
+        </div>
+      </section>
+
+      
+
+      <!-- 잠깐, 후불제라고 미뤄도 될까요? -->
+      <section>
+        <div class="container">
+          <div class="section-head">
+            <div class="kicker">Guide</div>
+            <h2 class="title">잠깐, 후불제라고 미뤄도 될까요?</h2>
+            <p class="desc">후불제의 진짜 의미는 경제적 부담 없이 가입할 수 있다는 것이지, 준비 자체를 미뤄도 된다는 뜻은 아닙니다.</p>
+          </div>
+          <div class="notice"><span class="pill">핵심</span><p class="desc" style="margin:10px 0 0;">사랑하는 가족이 갑작스런 상황에 놓였을 때, “어떻게 하고 싶으셨을까?”를 추측할 수는 없습니다. 미리 준비를 해주세요.</p></div>
+        </div>
+      </section>
+
+      <!-- 온라인 가입, 왜 지금 해야 할까요? -->
+      <section id="features">
+        <div class="container">
+          <div class="section-head">
+            <div class="kicker">Service</div>
+            <h2 class="title">온라인 가입, 왜 지금 해야 할까요?</h2>
+            <p class="desc">가장 필요할 때 흔들리지 않도록, 지금 미리 준비하세요.</p>
+          </div>
+          <div class="grid">
+            <article class="card"><h3>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.1 21.3c-.2 0-.4-.1-.5-.2l-6.5-6.3A5.2 5.2 0 1 1 12 6.2a5.2 5.2 0 1 1 7.8 7.1l-7.2 7.7c-.1.2-.3.3-.5.3z"/></svg>
+              마음케어 서비스</h3><p>명상 기반 애도 프로그램으로 장례 후 마음의 회복을 돕습니다. “언니를 보낸 막막함을 새로운 시작으로 바꿔준 마음케어”(실제 후기)</p></article>
+            <article class="card"><h3>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 17.2l8.8-8.8 3.8 3.8L6.9 21H3v-3.8zm12-9.5l1.8-1.8c.4-.4 1-.4 1.4 0l1.7 1.7c.4.4.4 1 0 1.4l-1.8 1.8-3.1-3.1z"/></svg>
+              엔딩플랜 서비스</h3><p>내가 원하는 방식으로 미리 준비하는 맞춤형 장례. 가족이 고민하지 않도록 마지막 배려를 전합니다.</p></article>
+            <article class="card"><h3>기존 회원도 온라인 가입이 필요해요</h3><p>오프라인 가입자도 온라인 가입을 통해 마음케어와 엔딩플랜 서비스를 받을 수 있습니다.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 엔딩플랜, 누구에게나 필요해요 -->
+      <section>
+        <div class="container">
+          <div class="section-head measure">
+            <div class="kicker">For Everyone</div>
+            <h2 class="title">엔딩플랜, 누구에게나 필요해요</h2>
+            <p class="desc">엔딩플랜은 죽음을 준비하는 일이 아니라, 삶을 존중하고 사랑을 전하는 약속입니다. 나의 뜻과 이야기를 미리 남겨 가족의 추측과 부담을 줄이고, 마지막까지 나다운 품위를 지켜줍니다.</p>
+          </div>
+          <article class="card accent" style="margin-top:10px;">
+            <ul class="compact desc" style="margin:4px 0 0;">
+              <li><b>30–40대</b>에게는, 예기치 못한 상황에도 흔들리지 않는 준비</li>
+              <li><b>50–60대</b>에게는, 가족의 고민과 부담을 줄여주는 사전 배려</li>
+              <li><b>70대 이상</b>에게는, 마지막까지 나다운 품위를 지키는 약속</li>
+            </ul>
+          </article>
+          
+          <div class="mini-grid">
+            <article class="card">
+              <h3>나만의 방식</h3>
+              <p class="desc">예식 형식, 음악·메시지, 장지·용품 선호를 미리 남겨 나답게 마무리합니다.</p>
+            </article>
+            <article class="card">
+              <h3>지정인 공유</h3>
+              <p class="desc">믿을 수 있는 가족/지인과 안전하게 공유해 급박한 순간에도 흔들림 없이 진행합니다.</p>
+            </article>
+            <article class="card">
+              <h3>원활한 진행</h3>
+              <p class="desc">나의 뜻이 분명해져 추측을 줄이고, 가족의 의사결정 부담을 가볍게 합니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section id="join">
+        <div class="container">
+          <div class="section-head">
+            <div class="kicker">Guide</div>
+            <h2 class="title">간편한 온라인 가입 & 엔딩플랜 작성</h2>
+            <p class="desc"><span class="pill" style="font-size:16px;padding:8px 12px;background:#fff0ea;border-color:#e7c9bf;color:var(--brand);"> 3분이면 완료! </span><br/><span style="display:inline-block;margin-left:10px;">온라인 가입 후 알림톡으로 작성 링크를 보내드립니다.</span></p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <div class="num" aria-hidden="true">1</div>
+              <div>
+                <strong>온라인 간편 가입</strong>
+                <p class="desc">필수 정보만 빠르게 입력해 가입을 완료합니다.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">2</div>
+              <div>
+                <strong>알림톡으로 링크 발송</strong>
+                <p class="desc">엔딩플랜 작성 링크를 안전하게 전송해 드립니다.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">3</div>
+              <div>
+                <strong>엔딩플랜 차근차근 작성</strong>
+                <p class="desc">나의 이야기와 원하는 예식·절차를 차분히 정리합니다.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num" aria-hidden="true">4</div>
+              <div>
+                <strong>지정인 공유 설정</strong>
+                <p class="desc">믿을 만한 가족에게 미리 공유하여 순조로운 진행을 보장합니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Testimonial / Visual / Soft banner -->
+      <section class="poem">
+        <div class="container">
+          <div class="soft-banner" style="margin-bottom:6px;">
+            <p class="desc">불현듯 닥치는 순간에도 흔들리지 않도록,<br/>지금의 평온함 속에서 차분히 준비하세요.</p>
+          </div>
+          <div class="quote-card">
+            <p class="quote">“마지막까지 나답게.<br/><span class="quote-sub">가족은 아쉬움보다 따뜻함을 기억했어요.</span>”</p>
+            <small>부산 · 김○○ 님 후기</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ / 안내 -->
+      <section id="faq" class="section-alt">
+        <div class="container">
+          <div class="section-head">
+            <div class="kicker">FAQ</div>
+            <h2 class="title">자주 묻는 질문</h2>
+            <p class="desc">후불제의 의미와 가입 타이밍, 진행 방법에 대해 답합니다.</p>
+          </div>
+          <details>
+            <summary>후불제인데 미리 준비를 해야 되나요?</summary>
+            <p>네. 후불제는 경제적 부담을 덜어 드리는 의미이지 준비 자체를 미루는 뜻은 아닙니다.</p>
+          </details>
+          <details>
+            <summary>기존가입자도 온라인 가입을 해야 되나요?</summary>
+            <p>네. 온라인 가입시 마음케어와 엔딩플랜 서비스 혜택까지 모두 제공 받을수 있습니다.</p>
+          </details>
+          <details>
+            <summary>엔딩플랜, 누구에게 필요한가요?</summary>
+            <p>30-40대의 바쁜 일상, 50-60대의 사전 준비, 70대 이상의 품위 있는 마무리까지 전 연령에게 필요합니다.</p>
+          </details>
+          <details>
+            <summary>엔딩플랜 작성은 어떻게 시작하나요?</summary>
+            <p>온라인 가입 후 발송되는 알림톡 링크에서 3분 만에 시작할 수 있습니다.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="container">
+        <div class="cta">
+          <div class="emblem" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21c-3-2.6-6-5.8-6-9.5 0-2.6 2-4.5 4.5-4.5 1.3 0 2.5.6 3.5 1.6 1-1 2.2-1.6 3.5-1.6 2.5 0 4.5 1.9 4.5 4.5 0 3.7-3 6.9-6 9.5-.9.8-2.1.8-3 0z"/></svg>
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21c-3-2.6-6-5.8-6-9.5 0-2.6 2-4.5 4.5-4.5 1.3 0 2.5.6 3.5 1.6 1-1 2.2-1.6 3.5-1.6 2.5 0 4.5 1.9 4.5 4.5 0 3.7-3 6.9-6 9.5-.9.8-2.1.8-3 0z"/></svg>
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21c-3-2.6-6-5.8-6-9.5 0-2.6 2-4.5 4.5-4.5 1.3 0 2.5.6 3.5 1.6 1-1 2.2-1.6 3.5-1.6 2.5 0 4.5 1.9 4.5 4.5 0 3.7-3 6.9-6 9.5-.9.8-2.1.8-3 0z"/></svg>
+          </div>
+          <h2>가족을 향한 마지막 사랑의 표현</h2>
+          <p>엔딩플랜은 떠나는 이의 마지막 배려이자, 남은 이들을 위한 따뜻한 위로입니다. 지금 시작해 보세요.</p>
+          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSe9ikSJt4MCKH0Z3uD2iB7RRXBilpv51dSZp2kV-9rIsuESAw/viewform" target="_blank" rel="noopener">온라인 가입 & 엔딩플랜 작성</a>
+          <a class="btn ghost" href="https://www.trueheartfn.com/" target="_blank" rel="noopener" style="background:#fff;color:var(--accent);border-color:var(--accent);">우리상조 홈페이지 둘러보기</a>
+        </div>
+      </section>
+    </main>
+
+    
+  </body>
+  </html>
+
+
